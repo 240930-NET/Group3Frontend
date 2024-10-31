@@ -1,0 +1,98 @@
+# Node modules folder
+/node_modules
+
+# Build output directory
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Environment variables
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Parcel-bundler cache
+.cache
+
+# Next.js build output
+.next
+
+# Gatsby files
+.cache/
+public
+
+# Cache
+/.eslintcache
+
+# IDE-specific files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# SASS cache
+.sass-cache
+
+# Optional npm cache directory
+.npm
+
+# Jest
+/jest.config.js
+/coverage/
+
+# Miscellaneous
+*.log
+
+# Build artifacts
+*.tsbuildinfo
+
+# Git hooks
+.husky/
+
+# Yarn
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.yarnrc.yml
+.pnp.*
+
+# Other
+*.env.local
+yarn.lock
+package-lock.json
+.pnpm-lock.yaml
+
+# Storybook build
+.out/
+
+# Generated files from npm/yarn
+*.lock
+
+# Ignoring compiled TypeScript files if any
+*.js.map
+*.d.ts
+
+# Ignoring React build output
+dist/

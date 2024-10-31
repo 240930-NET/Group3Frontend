@@ -4,13 +4,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    padding-top: 40px; /* Padding to control the form's position relative to the top */
+    padding: 20px;
+    min-height: 100vh; /* Make the login-page fill the full height of the viewport */
+    box-sizing: border-box; /* Include padding in total height calculations */
   }
   
   .login-form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
   }
   
   .login-form input {
@@ -33,5 +40,10 @@
   
   .login-form button:hover {
     background-color: #555;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
   }
   

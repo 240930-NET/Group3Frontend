@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './LoginPage.css';
+import './LoginPage.css'; 
 
-// LoginPage Component
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +17,7 @@ function LoginPage() {
 
       localStorage.setItem('token', response.data.Token);
       alert('Login successful');
+
       navigate('/user');
     } catch (error) {
       alert(error.response?.data || 'Login failed');

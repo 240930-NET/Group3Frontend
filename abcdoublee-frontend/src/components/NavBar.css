@@ -1,12 +1,19 @@
 /* NavBar.css */
 
 .nav-bar {
+    width: 100%; /* Make sure NavBar spans the entire width */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background-color: #333;
     color: #fff;
+    margin: 0;
+    box-sizing: border-box; /* Include padding within width/height */
+    position: fixed; /* Stick to the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays above other elements */
   }
   
   .nav-left, .nav-center, .nav-right {

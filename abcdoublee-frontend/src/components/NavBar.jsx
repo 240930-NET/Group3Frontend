@@ -1,9 +1,7 @@
-// Import necessary libraries
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css'; // Import CSS for styling
+import './NavBar.css';
 
-// NavBar Component
 function NavBar() {
   return (
     <nav className="nav-bar">
@@ -11,10 +9,11 @@ function NavBar() {
         <Link to="/">Home</Link>
       </div>
       <div className="nav-center">
-        <input type="text" placeholder="Search..." className="nav-search" />
+        <input type="text" className="nav-search" placeholder="Search..." />
       </div>
       <div className="nav-right">
-        <Link to="/login">User</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/create-account">Create Account</Link>
       </div>
     </nav>
   );

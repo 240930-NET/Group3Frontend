@@ -1,26 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { loginUser } from '../api/api.jsx';
 import './LoginPage.css'; 
 
 function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/api/authentication/login', {
-        username,
-        password,
-      });
-
-      localStorage.setItem('token', response.data.Token);
+      await loginUser(userName, password); // calling api.jsx
       alert('Login successful');
-
-      navigate('/user');
+      navigate('/user'); // Redirect to the user page if login succesfull
     } catch (error) {
-      alert(error.response?.data || 'Login failed');
+      alert(error.message || 'Login failed');
     }
   };
 
@@ -31,8 +25,8 @@ function LoginPage() {
         <input
           type="text"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
         <input
           type="password"

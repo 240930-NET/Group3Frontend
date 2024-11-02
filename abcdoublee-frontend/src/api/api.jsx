@@ -23,9 +23,17 @@ export const loginUser = async (userName, password) => {
       userName,
       password,
     });
-    return response.data.token;
+    const token =  response.data.token;
+    localStorage.setItem('token', token);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    return token
   } catch (error) {
     const errorMessage = error.response?.data?.message || "Login failed";
     throw new Error(errorMessage);
   }
 };
+
+export const logoutUser = () => {
+ localStorage.removeItem('token');
+ delete axios.defaults.headers.common['Authorization'];
+}

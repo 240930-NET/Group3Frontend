@@ -9,8 +9,8 @@ Folder Structure
 
     API:
         Location: src/api/api.jsx
-        Purpose: Contains API utility functions for HTTP requests, apiClient instance with the baseURL, and token management functions (setAuthToken, loginUser, logoutUser).**
-        **Key Consideration: All HTTP requests should use apiClient for consistent token handling and baseURL.
+        Purpose: Contains API utility functions for HTTP requests, apiClient instance with the baseURL, and token management functions (setAuthToken, loginUser, logoutUser).
+        **Key Consideration: All HTTP requests should use apiClient for consistent token handling and baseURL.**
 
     Pages:
         Purpose: Contains each page component (e.g., LoginPage, UserPage).

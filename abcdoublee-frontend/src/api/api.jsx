@@ -1,10 +1,26 @@
 import axios from 'axios';
-const API_BASE_URL = "http://localhost:5105/api/authentication";
+
+const API_BASE_URL = "http://localhost:5105/api";
+export const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+
+export const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};
 
 // Register User Function
 export const registerUser = async (userName, password, fullName) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/register`, {
+    const response = await apiClient.post('/authentication/register', {
       userName,
       password,
       fullName,
@@ -16,24 +32,27 @@ export const registerUser = async (userName, password, fullName) => {
   }
 };
 
+
 // Login User Function
 export const loginUser = async (userName, password) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, {
+    const response = await apiClient.post('/authentication/login', {
       userName,
       password,
     });
-    const token =  response.data.token;
+    const token = response.data.token.result;
+    //localStorage.setItem('token', token);
     localStorage.setItem('token', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    return token
+    setAuthToken(token); 
+    return token;
   } catch (error) {
     const errorMessage = error.response?.data?.message || "Login failed";
     throw new Error(errorMessage);
   }
 };
 
+
 export const logoutUser = () => {
  localStorage.removeItem('token');
- delete axios.defaults.headers.common['Authorization'];
+ setAuthToken(null);
 }

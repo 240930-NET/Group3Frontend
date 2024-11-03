@@ -2,16 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/api.jsx';
 import './LoginPage.css'; 
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 
 function LoginPage() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const { login } = useContext(AuthContext);
   const handleLogin = async () => {
     try {
-      await loginUser(userName, password); // calling api.jsx
-      alert('Login successful');
+      const token = await loginUser(userName, password); // calling api.jsx
+      login(token);
       navigate('/user'); 
     } catch (error) {
       alert(error.message || 'Login failed'); 

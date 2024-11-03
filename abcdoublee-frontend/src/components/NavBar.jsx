@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import UserDropdown from './UserDropdown.jsx';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+
 
 function NavBar() {
+  const { isLoggedIn, logout } = useContext(AuthContext); 
 
-  
   return (
     <nav className="nav-bar">
       <div className="nav-left">
@@ -13,8 +17,14 @@ function NavBar() {
         <input type="text" className="nav-search" placeholder="Search..." />
       </div>
       <div className="nav-right">
-        <Link to="/login">Login</Link>
-        <Link to="/register">Create Account</Link>
+        {isLoggedIn ? (
+          <UserDropdown handleLogout={logout} />
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Create Account</Link>
+          </>
+        )}
       </div>
     </nav>
   );

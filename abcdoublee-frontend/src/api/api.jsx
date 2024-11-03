@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = "http://localhost:5105/api";
+
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -11,9 +12,10 @@ export const apiClient = axios.create({
 
 export const setAuthToken = (token) => {
   if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    //console.log("Token set in headers:", apiClient.defaults.headers.common['Authorization']);
   } else {
-    delete axios.defaults.headers.common['Authorization'];
+    delete apiClient.defaults.headers.common['Authorization'];
   }
 };
 

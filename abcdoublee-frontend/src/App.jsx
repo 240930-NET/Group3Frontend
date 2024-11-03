@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavBar from './components/NavBar.jsx';  
@@ -6,19 +6,27 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx'; 
 import UserPage from './pages/UserPage.jsx';
 import './App.css';
-import axios from 'axios';
-//import { logoutUser } from './api/api';
 
 
 function App() {
   //react hook to handle token here
-  useEffect(()=> {
+  /*
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setAuthToken(token);
+      console.log("Token set on reload:", token);
     }
   },[])
-
+  */
+/*
+  const handleLogin = () => {
+    const newToken = localStorage.getItem('token');
+    if (newToken) {
+      setAuthToken(newToken);
+    }
+  };
+*/
   const ProtectedRoute = ({ element: Element }) => {
     const token = localStorage.getItem('token');
     return token ? <Element /> : <Navigate to="/login" replace />;

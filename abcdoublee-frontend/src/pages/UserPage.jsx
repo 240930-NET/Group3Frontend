@@ -1,6 +1,8 @@
 // src/pages/UserPage.js
 import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api';
+import { setAuthToken } from '../api/api.jsx';
+
 
 function UserPage() {
     const [userName, setUserName] = useState('');
@@ -9,15 +11,18 @@ function UserPage() {
 
     const fetchUserProfile = async () => {
         try {
-
+            const token = localStorage.getItem('token');
+            if (token) {
+              setAuthToken(token);
+              //console.log("on UserPage: Token set on reload:", token);
+            }
             const response = await apiClient.get('/user/profile');
-            console.log("User profile data:", response.data);
             setFullName(response.data.fullName);
             setUserName(response.data.userName);
         } catch (error) {
-            console.error("Error fetching user profile:", error.response?.data || error.message);
+            console.error("On UserPage: Error fetching user profile:", error.response?.data || error.message);
         } finally {
-            setLoading(false); // Stop loading once request is complete
+            setLoading(false); 
         }
     };
 

@@ -12,9 +12,9 @@ function LoginPage() {
     try {
       await loginUser(userName, password); // calling api.jsx
       alert('Login successful');
-      navigate('/user'); // Redirect to the user page if login succesfull
+      navigate('/user'); 
     } catch (error) {
-      alert(error.message || 'Login failed');
+      alert(error.message || 'Login failed'); 
     }
   };
 

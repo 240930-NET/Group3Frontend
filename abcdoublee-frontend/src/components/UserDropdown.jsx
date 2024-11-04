@@ -26,6 +26,7 @@ function UserDropdown() {
         <div className="user-dropdown-menu">
           <ul>
             <li onClick={() => navigate('/user')}>User Profile</li>
+            <li onClick={() => navigate('/preferences')}>User Preference</li>
             <li onClick={handleLogout}>Logout</li>
           </ul>
         </div>

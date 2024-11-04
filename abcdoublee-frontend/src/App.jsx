@@ -1,4 +1,3 @@
-import { React} from 'react';
 //route
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -10,6 +9,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx'; 
 import UserPage from './pages/UserPage.jsx';
 import HomePage from './pages/HomePage.jsx';
+import PreferencePage from './pages/PreferencePage';
 import './App.css';
 
 
@@ -33,6 +33,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user" element={<ProtectedRoute element={UserPage} />} />
+        <Route path="/preferences" element={<ProtectedRoute element={PreferencePage} />} />
       </Routes>
     </Router>
     </AuthProvider>

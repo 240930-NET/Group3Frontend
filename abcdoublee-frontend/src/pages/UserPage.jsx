@@ -1,4 +1,3 @@
-// src/pages/UserPage.js
 import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api';
 import { setAuthToken } from '../api/api.jsx';

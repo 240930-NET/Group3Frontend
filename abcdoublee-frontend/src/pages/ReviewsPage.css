@@ -1,0 +1,13 @@
+.reviews{
+    color: black;
+    background-color: #DFB785;
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+}
+
+.review{
+    background-color: white;
+    border-radius: 15px;
+    margin: 20px;
+}

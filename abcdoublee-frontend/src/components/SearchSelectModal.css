@@ -1,0 +1,86 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Modal title */
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Search input */
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* List of search results */
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+margin: 15px 0;
+}
+
+.modal-content ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+
+.modal-content ul li span {
+    font-size: 1em;
+    color: #555;
+}
+
+/* buttons */
+.modal-content button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b
+}
+
+.modal-content button:last-of-type {
+    background-color: #6c757d;
+    margin-top: 0;
+}
+
+.modal-content button:last-of-type:hover {
+    background-color: #5a6268;
+}

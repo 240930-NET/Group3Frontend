@@ -4,9 +4,8 @@ import { setAuthToken } from '../api/api.jsx';
 
 import './ReviewsPage.css';
 
-export default function ReviewsPage({isbn}) {
+export default function ReviewsPage({bookId}) {
     const [reviewList, setReviewList] = useState();
-    const [userList, setUserList] = useState();
     const [loading, setLoading] = useState(true);
 
     const fetchReviews = async () => {
@@ -16,17 +15,14 @@ export default function ReviewsPage({isbn}) {
               setAuthToken(token);
               //console.log("on UserPage: Token set on reload:", token);
             }
-            //Use this line of code once service is implemented
-            //const response = await apiClient.get('/Review/GetReviewByBook/'+isbn});
-            //For now, get all reviews regardless of book
-            const response = await apiClient.get('/Review');
+            const response = await apiClient.get('/Review/GetReviewsByBookId/'+bookId);
             const reviews = response.data;
 
             const reviewList = reviews.map(review => 
                 <div key = {review.reviewId} className='review'>
                     <p>Rating: {review.rating}</p>
                     <p>Review: {review.reviewText}</p>
-                    <p>Rated by: ?</p>
+                    <p>Rated by: {review.user.fullName}</p>
                 </div>);
             setReviewList(reviewList);
         } catch (error) {
@@ -42,7 +38,7 @@ export default function ReviewsPage({isbn}) {
 
     return (
         <div className='reviews'>
-            <h1>Here are some reviews for ?</h1>
+            <h1>Here are some reviews for this book!</h1>
             {reviewList}
         </div>
     );

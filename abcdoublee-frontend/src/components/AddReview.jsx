@@ -1,9 +1,10 @@
 import { useState, setState } from 'react';
 
 import './AddReview.css';
+import { apiClient } from '../api/api';
 
 export default function AddReview({bookId, userId}) {
-    const [rating, setRating] = useState(-1);
+    const [rating, setRating] = useState("");
     const [reviewText, setReviewText] = useState("");
 
     const handleRating = (e) => {
@@ -16,13 +17,14 @@ export default function AddReview({bookId, userId}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(rating+" "+reviewText+" "+bookId+" "+userId);
-            const response = await apiClient.post('/Review', {
-                rating,
-                reviewText,
-                bookId,
-                userId
+            const response = await apiClient.post('/review', {
+              rating,
+              reviewText,
+              bookId,
+              userId
             });
+            setRating("");
+            setReviewText("");
             return response.data;
         } catch (error) {
             const errorMessage = error.response?.data?.message || "Failed to add a review.";
@@ -31,24 +33,29 @@ export default function AddReview({bookId, userId}) {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Rating:
-      <input 
-        type="number" 
-        name="rating" 
-        value={rating}
-        onChange={handleRating}
-      />
-      </label>
-      <label>Review:
+    <div className='reviewBox'>
+      <h3>Would you like to leave a review for this book?</h3>
+      <form onSubmit={handleSubmit}>
+        <label>Rating:
         <input 
-          type="text" 
-          name="review" 
-          value={reviewText}
-          onChange={handleReview}
+          type="number" 
+          name="rating" 
+          value={rating}
+          placeholder='Enter your rating'
+          onChange={handleRating}
         />
         </label>
-        <input type="submit" />
-    </form>
+        <label>Review:
+          <input 
+            type="text" 
+            name="review" 
+            value={reviewText}
+            placeholder='Write your review'
+            onChange={handleReview}
+          />
+          </label>
+          <input type="submit" className='submitReviewButton'/>
+      </form>
+    </div>
   )
 }

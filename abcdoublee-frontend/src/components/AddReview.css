@@ -1,4 +1,26 @@
 form{
-    background-color: chocolate;
     color: black;
+    background-color: #DFB785;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 30px;
+}
+
+input{
+    margin: 15px;
+    background-color: white;
+    color: black;
+}
+
+.submitReviewButton{
+    border-radius: 15px;
+}
+
+.reviewBox{
+    background-color: #D0E98B;
+    border-color: #DFB785;
+    border-width: 10px;
+    color: black;
+    border-radius: 15px;
+    margin: 20px;
 }

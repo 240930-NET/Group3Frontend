@@ -5,14 +5,13 @@
   justify-content: flex-start;
   text-align: center;
   padding-top: 20px;
-  height: 100vh;
   box-sizing: border-box;
 }
 
 .home-page h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
-  margin-top: 40px;
+  margin-top: 70px;
 }
 
 .home-page p {
@@ -42,10 +41,38 @@
   padding: 20px;
 }
 
+.libraryFunctions{
+  display: flex;
+  flex-direction: row;
+}
+
+.addBookshelf{
+  background-color: #D0E98B;
+  border-radius: 15px;
+  margin: 20px;
+  padding: 20px;
+}
+
 .deleteButton{
   background-color: #e93b3b;
 }
 
+.editButton{
+  background-color: #dac54d;
+}
+
+.addButton{
+  background-color: #84944E;
+}
+
 button{
   margin: 20px;
+}
+
+input{
+  background-color: white;
+  color: black;
+  margin: 20px;
+  padding: 5px;
+  width: 60%;
 }

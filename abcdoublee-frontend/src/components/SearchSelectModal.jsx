@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api';
 import './SearchSelectModal.css';
 
@@ -6,20 +6,29 @@ const SearchSelectModal = ({ title, fetchUrl, onSelect, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  useEffect(() => {
+    // Trigger an empty search when the modal opens
+    const fetchInitialResults = async () => {
+      try {
+        const response = await apiClient.get(`${fetchUrl}/search`, { params: { search: '' } });
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error(`Error fetching ${title}:`, error);
+      }
+    };
+
+    fetchInitialResults();
+  }, [fetchUrl, title]); // Depend on fetchUrl to trigger on modal open
 
   const handleSearch = async (event) => {
     const term = event.target.value;
     setSearchTerm(term);
 
-    if (term) {
-      try {
-        const response = await apiClient.get(`/genre/search?search=${term}`);
-        setSearchResults(response.data);
-      } catch (error) {
-        console.error(`Error fetching ${title}:`, error);
-      }
-    } else {
-      setSearchResults([]);
+    try {
+      const response = await apiClient.get(`${fetchUrl}/search`, { params: { search: term } });
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error(`Error fetching ${title}:`, error);
     }
   };
 

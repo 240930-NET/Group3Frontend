@@ -5,13 +5,19 @@ import SearchSelectModal from '../components/SearchSelectModal';
 import './PreferencePage.css';
 
 function PreferencePage() {
-  const [preference, setPreference] = useState(null);
   const [modalConfig, setModalConfig] = useState(null);
+  const [preference, setPreference] = useState({
+    genres: [],
+    authors: [],
+    books: []
+  });
+
 
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
         const response = await apiClient.get('/preference');
+        console.log('Fetched preferences:', response.data);
         setPreference(response.data);
       } catch (error) {
         console.error('Error fetching preferences:', error);
@@ -21,27 +27,26 @@ function PreferencePage() {
     fetchPreferences();
   }, []);
 
-  // Remove a preference item
   const removePreferenceItem = async (type, id) => {
     try {
       await apiClient.delete(`/preference/${type}/${id}`);
-      setPreference((prev) => ({
-        ...prev,
-        [`${type}s`]: prev[`${type}s`].filter((item) => item[`${type}Id`] !== id),
-      }));
+      
+      // Refetch the updated preferences after deletion
+      const response = await apiClient.get('/preference');
+      setPreference(response.data);
     } catch (error) {
       console.error(`Error removing ${type}:`, error);
     }
   };
 
-  // Add a genre, author, or book
-  const addPreferenceItem = async (type, itemId) => {
+  const addPreferenceItem = async (type, id) => {
     try {
-      const response = await apiClient.post(`/preference/${type}`, { [`${type}Id`]: itemId });
-      setPreference((prev) => ({
-        ...prev,
-        [`${type}s`]: [...prev[`${type}s`], response.data],
-      }));
+      await apiClient.post(`/preference/${type}`, id, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      // Refetch the updated preferences after adding
+      const response = await apiClient.get('/preference');
+      setPreference(response.data);
     } catch (error) {
       console.error(`Error adding ${type}:`, error);
     }
@@ -51,8 +56,8 @@ function PreferencePage() {
   const openModal = (type) => {
     const config = {
       title: type.charAt(0).toUpperCase() + type.slice(1),
-      fetchUrl: `/${type}s`,
-      onSelect: (item) => addPreferenceItem(type, item.id),
+      fetchUrl: `/${type}`,
+      onSelect: (item) => addPreferenceItem(type, item[`${type}Id`])
     };
     setModalConfig(config);
   };
@@ -63,21 +68,21 @@ function PreferencePage() {
 
       <PreferenceList
         title="Genres"
-        preferences={preference?.genres}
+        preferences={preference?.preferenceGenres}
         onRemove={(id) => removePreferenceItem('genre', id)}
         onAdd={() => openModal('genre')}
       />
 
       <PreferenceList
         title="Authors"
-        preferences={preference?.authors}
+        preferences={preference?.preferenceAuthors}
         onRemove={(id) => removePreferenceItem('author', id)}
         onAdd={() => openModal('author')}
       />
 
       <PreferenceList
         title="Books"
-        preferences={preference?.books}
+        preferences={preference?.preferenceBooks}
         onRemove={(id) => removePreferenceItem('book', id)}
         onAdd={() => openModal('book')}
       />

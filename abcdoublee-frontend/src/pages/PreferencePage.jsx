@@ -83,12 +83,14 @@ function PreferencePage() {
       />
 
       {modalConfig && (
+        <div className='modal'>
         <SearchSelectModal
           title={modalConfig.title}
           fetchUrl={modalConfig.fetchUrl}
           onSelect={modalConfig.onSelect}
           onClose={() => setModalConfig(null)}
         />
+        </div>
       )}
     </div>
   );

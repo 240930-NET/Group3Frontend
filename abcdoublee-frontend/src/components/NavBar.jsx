@@ -3,6 +3,7 @@ import './NavBar.css';
 import UserDropdown from './UserDropdown.jsx';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
+import SearchComponent from './SearchComponent';
 
 
 function NavBar() {
@@ -15,7 +16,7 @@ function NavBar() {
         <Link to="/browse">Browse</Link>
       </div>
       <div className="nav-center">
-        <input type="text" className="nav-search" placeholder="Search..." />
+           <SearchComponent />
       </div>
       <div className="nav-right">
         {isLoggedIn ? (

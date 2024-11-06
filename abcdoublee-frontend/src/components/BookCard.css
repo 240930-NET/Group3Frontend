@@ -1,0 +1,23 @@
+.book-card {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    transition: transform 0.2s;
+  }
+  
+  .book-image {
+    max-width: 100%;
+    border-radius: 5px;
+  }
+  
+  .book-info {
+    text-align: center;
+    margin-top: 10px;
+  }
+  

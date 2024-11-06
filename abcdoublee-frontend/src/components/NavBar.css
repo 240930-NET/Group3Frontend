@@ -1,52 +1,51 @@
-/* NavBar.css */
-
 .nav-bar {
-    width: 100%; /* Make sure NavBar spans the entire width */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    margin: 0;
-    box-sizing: border-box; /* Include padding within width/height */
-    position: fixed; /* Stick to the top */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensure it stays above other elements */
-  }
-  
-  .nav-left, .nav-center, .nav-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-left a, .nav-right a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
-  }
-  
-  .nav-left a:hover, .nav-right a:hover {
-    color: #f0a500;
-  }
-  
-  .nav-center {
-    flex-grow: 1;
-    justify-content: center;
-  }
-  
-  .nav-search {
-    padding: 5px;
-    width: 50%;
-    max-width: 400px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .nav-search::placeholder {
-    color: #888;
-  }
-  
+  width: 100%; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  box-sizing: border-box; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left a, .nav-right a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+  color: #f0a500;
+}
+
+.nav-center {
+  flex-grow: 2; /* Increase this if need bigger center */
+  justify-content: center;
+  display: flex; 
+  justify-content: center; 
+}
+
+.nav-search {
+  padding: 5px;
+  width: 70%; 
+  max-width: 600px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.nav-search::placeholder {
+  color: #888;
+}

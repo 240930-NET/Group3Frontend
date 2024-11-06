@@ -1,3 +1,4 @@
+/* Overlay to cover the full screen */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -11,14 +12,21 @@
     z-index: 1000;
 }
 
+/* Modal container */
 .modal-content {
     background-color: #fff;
     padding: 20px;
-    width: 90%;
-    max-width: 500px;
+    width: 90vh;
+    max-width: 1280px; 
+    height: 60vh;
+    max-height: 70vh;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box; 
 }
 
 /* Modal title */
@@ -36,31 +44,36 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 /* List of search results */
 .modal-content ul {
     list-style-type: none;
     padding: 0;
-    max-height: 200px;
+    height: 75%;
     overflow-y: auto;
-margin: 15px 0;
+    margin: 15px 0;
+    width: 100%; /* Ensures the list takes up full width of modal */
 }
 
+/* List item styling */
 .modal-content ul li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eaeaea;
+    width: 98%; /* Matches modal content width */
+    box-sizing: border-box;
 }
-
 
 .modal-content ul li span {
     font-size: 1em;
     color: #555;
 }
 
-/* buttons */
+/* Buttons */
 .modal-content button {
     background-color: #007bff;
     color: #fff;
@@ -70,10 +83,11 @@ margin: 15px 0;
     font-size: 0.9em;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .modal-content button:hover {
-    background-color: #0056b
+    background-color: #0056b3;
 }
 
 .modal-content button:last-of-type {

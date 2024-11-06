@@ -11,6 +11,7 @@ import UserPage from './pages/UserPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import PreferencePage from './pages/PreferencePage';
 import './App.css';
+import BrowsePage from './pages/BrowsePage.jsx';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user" element={<ProtectedRoute element={UserPage} />} />
         <Route path="/preferences" element={<ProtectedRoute element={PreferencePage} />} />
+        <Route path="/browse" element={<BrowsePage />} />
       </Routes>
     </Router>
     </AuthProvider>

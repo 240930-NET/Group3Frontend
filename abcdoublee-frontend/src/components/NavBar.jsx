@@ -12,6 +12,7 @@ function NavBar() {
     <nav className="nav-bar">
       <div className="nav-left">
         <Link to="/">Home</Link>
+        <Link to="/browse">Browse</Link>
       </div>
       <div className="nav-center">
         <input type="text" className="nav-search" placeholder="Search..." />

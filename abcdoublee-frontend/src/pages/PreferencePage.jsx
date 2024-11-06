@@ -1,76 +1,95 @@
-// src/pages/PreferencePage.jsx
 import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api';
+import PreferenceList from '../components/PreferenceList';
+import SearchSelectModal from '../components/SearchSelectModal';
 import './PreferencePage.css';
 
 function PreferencePage() {
   const [preference, setPreference] = useState(null);
+  const [modalConfig, setModalConfig] = useState(null);
 
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
-        // Confirming token in Authorization header
-        console.log("Authorization header:", apiClient.defaults.headers.common['Authorization']);
-
-        const response = await apiClient.get('/preference'); // Make sure endpoint matches backend
+        const response = await apiClient.get('/preference');
         setPreference(response.data);
       } catch (error) {
-        console.error('Error fetching preference:', error);
+        console.error('Error fetching preferences:', error);
       }
     };
 
     fetchPreferences();
   }, []);
 
-  if (!preference) {
-    return <p>Loading preferences...</p>;
-  }
+  // Remove a preference item
+  const removePreferenceItem = async (type, id) => {
+    try {
+      await apiClient.delete(`/preference/${type}/${id}`);
+      setPreference((prev) => ({
+        ...prev,
+        [`${type}s`]: prev[`${type}s`].filter((item) => item[`${type}Id`] !== id),
+      }));
+    } catch (error) {
+      console.error(`Error removing ${type}:`, error);
+    }
+  };
+
+  // Add a genre, author, or book
+  const addPreferenceItem = async (type, itemId) => {
+    try {
+      const response = await apiClient.post(`/preference/${type}`, { [`${type}Id`]: itemId });
+      setPreference((prev) => ({
+        ...prev,
+        [`${type}s`]: [...prev[`${type}s`], response.data],
+      }));
+    } catch (error) {
+      console.error(`Error adding ${type}:`, error);
+    }
+  };
+
+  // Open modal with configuration for adding genres, authors, or books
+  const openModal = (type) => {
+    const config = {
+      title: type.charAt(0).toUpperCase() + type.slice(1),
+      fetchUrl: `/${type}s`,
+      onSelect: (item) => addPreferenceItem(type, item.id),
+    };
+    setModalConfig(config);
+  };
 
   return (
     <div className="preference-page">
       <h1>Your Preferences</h1>
 
-      {/* Display Favorite Genres */}
-      <section>
-        <h2>Favorite Genres</h2>
-        {preference.preferenceGenres && preference.preferenceGenres.length > 0 ? (
-          <ul>
-            {preference.preferenceGenres.map((genreObj, index) => (
-              <li key={index}>{genreObj.genre.name}</li> 
-            ))}
-          </ul>
-        ) : (
-          <p>No favorite genres added.</p>
-        )}
-      </section>
+      <PreferenceList
+        title="Genres"
+        preferences={preference?.genres}
+        onRemove={(id) => removePreferenceItem('genre', id)}
+        onAdd={() => openModal('genre')}
+      />
 
-      {/* Display Favorite Books */}
-      <section>
-        <h2>Favorite Books</h2>
-        {preference.preferenceBooks && preference.preferenceBooks.length > 0 ? (
-          <ul>
-            {preference.preferenceBooks.map((bookObj) => (
-              <li key={bookObj.book.bookId}>{bookObj.book.title}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No favorite books added.</p>
-        )}
-      </section>
+      <PreferenceList
+        title="Authors"
+        preferences={preference?.authors}
+        onRemove={(id) => removePreferenceItem('author', id)}
+        onAdd={() => openModal('author')}
+      />
 
-      {/* Display Favorite Authors */}
-      <section>
-        <h2>Favorite Authors</h2>
-        {preference.preferenceAuthors && preference.preferenceAuthors.length > 0 ? (
-          <ul>
-            {preference.preferenceAuthors.map((authorObj, index) => (
-              <li key={index}>{authorObj.author.name}</li> 
-            ))}
-          </ul>
-        ) : (
-          <p>No favorite authors added.</p>
-        )}
-      </section>
+      <PreferenceList
+        title="Books"
+        preferences={preference?.books}
+        onRemove={(id) => removePreferenceItem('book', id)}
+        onAdd={() => openModal('book')}
+      />
+
+      {modalConfig && (
+        <SearchSelectModal
+          title={modalConfig.title}
+          fetchUrl={modalConfig.fetchUrl}
+          onSelect={modalConfig.onSelect}
+          onClose={() => setModalConfig(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,0 +1,50 @@
+/* Style for PreferenceList container */
+.preference-list-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for each item in the list */
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.preference-item:last-child {
+    border-bottom: none;
+}
+
+/* Remove button styling */
+.preference-item button {
+    background-color: #ff6666;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.preference-item button:hover {
+    background-color: #ff4c4c;
+}
+
+.add-button {
+    background-color: #28a745; /* Green color */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

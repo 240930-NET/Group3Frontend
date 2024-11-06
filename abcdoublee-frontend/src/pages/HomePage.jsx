@@ -13,10 +13,14 @@ function HomePage() {
         const token = localStorage.getItem('token');
         if (token) {
           setAuthToken(token);
-          //console.log("on UserPage: Token set on reload:", token);
         }
         //Change endpoint to get user's library id
-        const response = await apiClient.get('/library/2/bookshelves');
+        const userId = await apiClient.get('/user/userId');
+        console.log("User ID is: "+userId.data);
+        const user = await apiClient.get('/user/GetUserById/'+userId.data);
+        const libraryId = user.data.libraryId;
+        console.log("Library ID is: "+libraryId);
+        const response = await apiClient.get('/library/'+libraryId+'/bookshelves');
         const bookshelves = response.data;
 
         const bookshelfList = bookshelves.map(bookshelf => 

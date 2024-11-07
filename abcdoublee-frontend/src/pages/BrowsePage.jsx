@@ -11,8 +11,9 @@ function BrowsePage() {
           try {
             // Confirming token in Authorization header
             console.log("Authorization header:", apiClient.defaults.headers.common['Authorization']);
-    
+
             const response = await apiClient.get('/Book'); // Make sure endpoint matches backend
+            console.log(response);
             setBooks(response.data);
           } catch (error) {
             console.error('Error fetching books:', error);

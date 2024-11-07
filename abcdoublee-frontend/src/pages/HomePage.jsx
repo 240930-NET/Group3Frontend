@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api.jsx';
 import { setAuthToken } from '../api/api.jsx';
+import Bookshelf from '../components/Bookshelf.jsx';
 
 import './HomePage.css';
 
@@ -46,17 +47,19 @@ const addBookshelf = async (e) => {
       const newResponse = await apiClient.get('/library/'+libraryId+'/bookshelves');
       const bookshelves = newResponse.data;
       setBookshelfList(bookshelves);
+      // Clear input field
+      setAddBookshelfName("");
       return response.data;
   } catch (error) {
       const errorMessage = error.response?.data?.message || "Failed to add a bookshelf.";
       throw new Error(errorMessage);
   }
 }
-
+/*
 const deleteBookshelf = async (e, bookshelfId, currentLibraryId) => {
-  e.preventDefault();
   try {
-      const response = await apiClient.delete('/library/'+currentLibraryId+'/bookshelves/'+bookshelfId);
+      //const response = await apiClient.delete('/library/'+currentLibraryId+'/bookshelves/'+bookshelfId);
+      const response = await apiClient.delete(`/Library/bookshelves/${bookshelfId}`);
       setBookshelfList((bookshelfList) => bookshelfList.filter(bookshelf=> bookshelf.bookshelfId !== bookshelfId));
       return response.data;
   } catch (error) {
@@ -65,33 +68,45 @@ const deleteBookshelf = async (e, bookshelfId, currentLibraryId) => {
   }
 
 }
+*/
+const deleteBookshelf = async (bookshelfId) => {
+  try {
+    const response = await apiClient.delete(`/Library/bookshelves/${bookshelfId}`);
+    setBookshelfList((prevList) => prevList.filter(bookshelf => bookshelf.bookshelfId !== bookshelfId));
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || "Failed to delete a bookshelf.";
+    throw new Error(errorMessage);
+  }
+};
 
-  return (
-    <div className="home-page">
-      <h1>Welcome to ABCDoubleE Book Tracker!</h1>
-      <p>You can track all your books in this application.</p>
-      <div className='bookshelves'>
-        <h1>Bookshelves</h1>
-        <div className='bookshelvesGrid'>
-        {bookshelfList.map(bookshelf => (
-          <div key={bookshelf.bookshelfId} className="bookshelf">
-            <p>{bookshelf.name}</p>
-            <button className='editButton'>Edit</button>
-            <button className="deleteButton"onClick={(e) => deleteBookshelf(e, bookshelf.bookshelfId, libraryId)}>Delete</button>
-            </div> ))} 
+return (
+  <div className="home-page">
+    <h1>Welcome to ABCDoubleE Book Tracker!</h1>
+    <p>You can track all your books in this application.</p>
+    <div className='bookshelves'>
+      <h1>Bookshelves</h1>
+      <div className='libraryFunctions'>
+        <div className='addBookshelf'>
+          <label htmlFor="addBookshelfInput">New Bookshelf:</label>
+          <input id="addBookshelfInput" type="text" placeholder="Enter the name of the bookshelf" 
+            value={addBookshelfName}
+            onChange={(e) => setAddBookshelfName(e.target.value)} />
+          <button className="addButton" onClick={addBookshelf}>Add</button>
         </div>
-        <div className='libraryFunctions'>
-          <div className='addBookshelf'>
-            <label htmlFor="addBookshelfInput">New Bookshelf:</label>
-            <input id="addBookshelfInput" type="text" placeholder= "Enter the name of the bookshelf" 
-            onChange={(e) => setAddBookshelfName(e.target.value)}/>
-            <button className="addButton" onClick={addBookshelf}>Add Bookshelf</button>
-            </div>
-        </div>
-        
+      </div>
+      <div className='bookshelvesGrid'>
+        {bookshelfList.map((bookshelf) => (
+          <Bookshelf
+            key={bookshelf.bookshelfId}
+            bookshelf={bookshelf}
+            onDelete={deleteBookshelf} // Directly pass the delete function
+          />
+        ))}
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default HomePage;

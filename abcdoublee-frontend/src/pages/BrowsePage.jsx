@@ -1,7 +1,7 @@
 import './BrowsePage.css';
 import { useEffect, useState } from 'react';
 import { apiClient } from '../api/api';
-
+import BookCard from '../components/BookCard';
 function BrowsePage() {
 
     const [books, setBooks] = useState(null);
@@ -29,13 +29,7 @@ function BrowsePage() {
       {books != null ? (
           <div className="card-list">
             {books.map((bookInList) => (
-                <div className="card" onClick={() =>console.log("click")}>
-                <img src={bookInList.image}/>
-                <p>Title: {bookInList.title}</p>
-                <button> Add To Library</button> 
-                <p>Description: {bookInList.description}</p>
-                <p>ISBN: {bookInList.isbn}</p>
-                </div>
+              <BookCard key={bookInList.isbn} book={bookInList} />
             ))}
           </div>
         ) : (

@@ -3,6 +3,12 @@
     gap: 2.5%;
     grid-template-columns: 23% 23% 23% 23%;
 }
+.main-content {
+
+    width: 100%;
+    display: flex;
+  flex-direction: column;
+}
 
 .card {
     background-color: #ffffff;
@@ -25,6 +31,7 @@
 .browse-page{
     text-align: center;
     padding-top: 2.5%;
+    width: 80%;
 }
 
 body {
@@ -33,4 +40,10 @@ body {
 
 #root{
     padding-bottom: 20%;
+    background-color: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }

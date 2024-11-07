@@ -66,35 +66,41 @@ function PreferencePage() {
     <div className="preference-page">
       <h1>Your Preferences</h1>
 
-      <PreferenceList
-        title="Genres"
-        preferences={preference?.preferenceGenres}
-        onRemove={(id) => removePreferenceItem('genre', id)}
-        onAdd={() => openModal('genre')}
-      />
+        <div className='modal'>
+          <PreferenceList
+            title="Genres"
+            preferences={preference?.preferenceGenres}
+            onRemove={(id) => removePreferenceItem('genre', id)}
+            onAdd={() => openModal('genre')}
+          />
+        </div>
 
-      <PreferenceList
-        title="Authors"
-        preferences={preference?.preferenceAuthors}
-        onRemove={(id) => removePreferenceItem('author', id)}
-        onAdd={() => openModal('author')}
-      />
+        <div className='modal'>
+          <PreferenceList
+            title="Authors"
+            preferences={preference?.preferenceAuthors}
+            onRemove={(id) => removePreferenceItem('author', id)}
+            onAdd={() => openModal('author')}
+          />
+        </div>
 
-      <PreferenceList
-        title="Books"
-        preferences={preference?.preferenceBooks}
-        onRemove={(id) => removePreferenceItem('book', id)}
-        onAdd={() => openModal('book')}
-      />
+        <div className='modal'>
+          <PreferenceList
+            title="Books"
+            preferences={preference?.preferenceBooks}
+            onRemove={(id) => removePreferenceItem('book', id)}
+            onAdd={() => openModal('book')}
+          />
+        </div>
 
       {modalConfig && (
         <div className='modal'>
-        <SearchSelectModal
-          title={modalConfig.title}
-          fetchUrl={modalConfig.fetchUrl}
-          onSelect={modalConfig.onSelect}
-          onClose={() => setModalConfig(null)}
-        />
+          <SearchSelectModal
+            title={modalConfig.title}
+            fetchUrl={modalConfig.fetchUrl}
+            onSelect={modalConfig.onSelect}
+            onClose={() => setModalConfig(null)}
+          />
         </div>
       )}
     </div>

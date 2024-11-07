@@ -100,7 +100,8 @@ function UserPage() {
                     backgroundColor: 'white',
                     padding: '20px',
                     width: '250px',
-                    border: '1px solid #ccc'
+                    border: '1px solid #ccc',
+                    color: 'grey',
                 }}>
                     <h2>Edit Profile</h2>
                     <label>

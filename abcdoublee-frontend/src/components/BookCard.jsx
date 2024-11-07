@@ -14,9 +14,7 @@ function BookCard({ book }) {
             <div className="book-info">
                 <h3>{book.title}</h3>
                 <p><strong>Authors:</strong> {book.authors?.join(', ') || 'N/A'}</p> {/* Display list of authors */}
-                <p><strong>Genres:</strong> {book.genres?.join(', ') || 'N/A'}</p>   {/* Display list of genres */}
             </div>
-
             {isModalOpen && (
                 <BookModal
                     book={book}

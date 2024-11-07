@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import AddToBookshelfModal from './AddToBookshelfModal';
 import './BookModal.css';
 
-function BookModal({ book, onClose, onAddToLibrary, onAddToFavorites, onLeaveReview }) {
+function BookModal({ book, onClose, onAddToFavorites, onLeaveReview }) {
+  const [showAddToBookshelfModal, setShowAddToBookshelfModal] = useState(false);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="book-modal" onClick={(e) => e.stopPropagation()}>
@@ -18,20 +22,26 @@ function BookModal({ book, onClose, onAddToLibrary, onAddToFavorites, onLeaveRev
             <p><strong>Author(s):</strong> {book.authors?.join(', ') || 'N/A'}</p>
             <p><strong>Genre(s):</strong> {book.genres?.join(', ') || 'N/A'}</p>
 
-            {/* Scrollable Description Box */}
             <div className="book-description">
               "{book.description || 'No description available.'}"
             </div>
 
-            {/* Action Buttons */}
             <div className="action-buttons">
               <button onClick={onAddToFavorites}>Add to Favorites</button>
-              <button onClick={onAddToLibrary}>Add to Bookshelf</button>
+              <button onClick={() => setShowAddToBookshelfModal(true)}>Add to Bookshelf</button>
               <button onClick={onLeaveReview}>Leave a Review</button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* AddToBookshelfModal */}
+      {showAddToBookshelfModal && (
+        <AddToBookshelfModal
+          book={book} // Pass the full book object here
+          onClose={() => setShowAddToBookshelfModal(false)} // Close modal after adding
+        />
+      )}
     </div>
   );
 }

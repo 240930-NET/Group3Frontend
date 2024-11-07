@@ -6,6 +6,9 @@
   text-align: center;
   padding-top: 20px;
   box-sizing: border-box;
+  width: 100vw;
+  max-width: 100%;
+  padding: 20px;
 }
 
 .home-page h1 {
@@ -27,12 +30,60 @@
   background-color: #DFB785;
   border-radius: 15px;
   padding: 30px;
+  width: 100%; 
+  max-width: 100%; 
+  margin: 0 auto;
+  overflow-x: auto;
 }
 
-.bookshelvesGrid{
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+.books-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; 
+  overflow-x: auto;
+  padding-bottom: 10px; 
 }
+
+.book {
+  flex: 0 0 auto; 
+  width: 150px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+
+.bookshelvesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  width: 100%; 
+}
+
+.bookshelf-row {
+  width: 100%; 
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.book-card {
+  flex: 0 0 auto; 
+  width: 200px; 
+  margin-right: 10px; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+  text-align: center;
+}
+
 
 .bookshelf{
   background-color: white;
@@ -44,6 +95,8 @@
 .libraryFunctions{
   display: flex;
   flex-direction: row;
+  justify-content: center; 
+  width: 95%; 
 }
 
 .addBookshelf{
@@ -51,6 +104,18 @@
   border-radius: 15px;
   margin: 20px;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.addBookshelf input {
+  margin-right: 10px; 
+  flex-grow: 1; 
+}
+.addBookshelf label {
+  margin-right: 10px; 
+  white-space: nowrap;
 }
 
 .deleteButton{

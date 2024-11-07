@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage.jsx';
 import PreferencePage from './pages/PreferencePage';
 import BrowsePage from './pages/BrowsePage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
+import PollutePage from './pages/PollutePage';
 import './App.css';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/preferences" element={<ProtectedRoute element={PreferencePage} />} />
         <Route path="/browse" element={<BrowsePage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/pollute" element={<PollutePage />} />
         </Routes>
       </div>
     </Router>
